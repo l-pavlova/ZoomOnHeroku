@@ -3,6 +3,7 @@ const app = express()
 const server = require('http').Server(app)
 const io = require('socket.io')(server)
 const{ v4:uuidV4} = require('uuid')
+var port = process.env.PORT || 3000
 app.set('view engine', 'ejs')
 app.use(express.static('public'))
 
@@ -21,4 +22,4 @@ io.on('connection', socket => {
         socket.to(roomId).broadcast.emit("user-disconnected", userId)
     })
 })
-server.listen(3000)
+server.listen(port)
